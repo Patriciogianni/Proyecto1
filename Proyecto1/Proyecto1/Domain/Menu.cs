@@ -9,7 +9,7 @@ namespace Proyecto_10_FINAL.domain
     class Menu
     {
         private int opcion;
-
+       
         static Person createPerson()
         {
             Person person = new Person();
@@ -74,52 +74,52 @@ namespace Proyecto_10_FINAL.domain
         }
 
 
-        //static DefinitivePerson asociar(Person p, File f)
-        //{
-        //    DefinitivePerson person1 = new DefinitivePerson();
-
-        //    person1.PersonDef.Du = p.Du;
-        //    person1.PersonDef.Gender = p.Gender;
-        //    person1.PersonDef.LastName = p.LastName;
-        //    person1.PersonDef.Name = p.Name;
-        //    person1.PersonDef.Age = p.Age;
-        //    person1.PersonDef.DateBirth = p.DateBirth;
-        //    person1.PersonDef.CodePerson = p.CodePerson;
-        //    person1.FileDef.IdFile = f.IdFile;
-
-        //    return person1;
-        //}
-
-        //static void showPersonList(List<DefinitivePerson> defList)
-        //{
-        //    foreach (DefinitivePerson p in defList)
-        //    {
-        //        Console.WriteLine(p.FileDef.IdFile + p.PersonDef.Du + p.PersonDef.LastName + ", " + p.PersonDef.Name);
-        //    }
-        //}
-
-        static void fileandPersonLists(List<Person> personList, List<File> fileList)
+        static DefinitivePerson asociar(Person p, File f)
         {
-            Console.WriteLine("Lista de Personas");
-            Console.WriteLine(" ");
-            foreach (Person p in personList)
+            DefinitivePerson person1 = new DefinitivePerson();
+           
+            person1.PersonDef.Du = p.Du;
+            person1.PersonDef.Gender = p.Gender;
+            person1.PersonDef.LastName = p.LastName;
+            person1.PersonDef.Name = p.Name;
+            person1.PersonDef.Age = p.Age;
+            person1.PersonDef.DateBirth = p.DateBirth;
+            person1.PersonDef.CodePerson = p.CodePerson;
+            person1.FileDef.IdFile = f.IdFile;
+
+            return person1;
+        }
+
+        static void showPersonList(List<DefinitivePerson> defList)
+        {
+            foreach (DefinitivePerson p in defList)
             {
-                Console.WriteLine(/*p.FileID +*/ p.CodePerson + " " + p.Du + " " + p.LastName + ", " + p.Name);
-            }
-            Console.WriteLine(" ");
-            Console.WriteLine("Lista de Legajos");
-            Console.WriteLine(" ");
-            foreach (File f in fileList)
-            {
-                Console.WriteLine(f.IdFile);
+                Console.WriteLine(p.FileDef.IdFile + p.PersonDef.Du + p.PersonDef.LastName + ", " + p.PersonDef.Name);
             }
         }
+
+        //static void fileandPersonLists(List<Person> personList, List<File> fileList)
+        //{
+        //    Console.WriteLine("Lista de Personas");
+        //    Console.WriteLine(" ");
+        //    foreach (Person p in personList)
+        //    {
+        //        Console.WriteLine(p.FileID + p.CodePerson + " " + p.Du + " " + p.LastName + ", " + p.Name);
+        //    }
+        //    Console.WriteLine(" ");
+        //    Console.WriteLine("Lista de Legajos");
+        //    Console.WriteLine(" ");
+        //    foreach (File f in fileList)
+        //    {
+        //        Console.WriteLine(f.IdFile);
+        //    }
+        //}
 
         public void showMenu()
         {
             List<Person> personList = new List<Person>();
             List<File> fileList = new List<File>();
-            //List<DefinitivePerson> defList = new List<DefinitivePerson>();
+            List<DefinitivePerson> defList = new List<DefinitivePerson>();
 
             do
             {
@@ -148,26 +148,29 @@ namespace Proyecto_10_FINAL.domain
                 {
                     case 0:
 
+                        Console.WriteLine("Se agrega el legajo a la persona");
+
+                        // Se crea la persona y se agrega a la lista de personas.
                         Person person = createPerson();
-                        personList.Add(person); // Se crea la persona y se agrega a la lista de personas.
+                        personList.Add(person);
+                        
+                        // Se crea un legajo y se agrega a la lista de legajos.
+                        File file = createFile(personList, generateId().ToString("PG 000/00"));
+                        fileList.Add(file);
 
-
-                        //DefinitivePerson person10 = asociar(person, file);
-                        //defList.Add(person10);
+                        // Se crea una persona Definitiva y se le agrega la persona y su respectivo ID Legajo.
+                        DefinitivePerson person10 = asociar(person, file);
+                        defList.Add(person10);
 
 
                         break;
 
                     case 1:
 
-                        // Creo el legajo con una persona y su Id lista generado.
-                        File file = createFile(personList, generateId().ToString("PG 000/00"));
-
-                        // Agrego el legajo a la lista de legajos.
-                        fileList.Add(file);
-
-
-
+                        //// Creo el legajo con una persona y su Id lista generado.
+                        //File file = createFile(personList, generateId().ToString("PG 000/00"));
+                        //// Agrego el legajo a la lista de legajos.
+                        //fileList.Add(file);
                         break;
 
                     case 2:
@@ -182,8 +185,8 @@ namespace Proyecto_10_FINAL.domain
                         break;
 
                     case 4:
-                        //showPersonList(defList);
-                        fileandPersonLists(personList, fileList);
+                        showPersonList(defList);
+                        //fileandPersonLists(personList, fileList);
                         break;
 
                     case 5:
