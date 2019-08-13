@@ -24,7 +24,6 @@ namespace Proyecto_10_FINAL.domain
             }
 
         }
-
         public Person Person
         {
             get
@@ -39,13 +38,10 @@ namespace Proyecto_10_FINAL.domain
 
         }
 
-
         public void toString() //Muestro por pantalla lo cargado.
         {
             Console.WriteLine("Id del legajo: {0}\n", IdFile);
             Console.WriteLine("Codigo de la persona : {0}\n", Person.CodePerson);
         }
-
-
     }
 }

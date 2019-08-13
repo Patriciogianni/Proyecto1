@@ -15,7 +15,6 @@ namespace Proyecto_10_FINAL.domain
         private int age;
         private string dateBirth;
         private string codePerson;
-        // private string fileID;
 
         public int Du
         {
@@ -115,21 +114,7 @@ namespace Proyecto_10_FINAL.domain
 
         }
 
-        //public string FileID
-        //{
-        //    get
-        //    {
-        //        return fileID;
-        //    }
-
-        //    set
-        //    {
-        //        fileID = value;
-        //    }
-
-        //}
-
-        public void toString() // Muestro por patallla lo cargado.
+        public void showPerson() // Muestro por patallla lo cargado.
         {
             Console.WriteLine(" ");
             Console.WriteLine("Estos son los Datos Cargados...");
@@ -141,11 +126,8 @@ namespace Proyecto_10_FINAL.domain
             Console.WriteLine("Edad: {0}\n", Age);
             Console.WriteLine("Fecha de Nacimiento: {0}\n", DateBirth);
             Console.WriteLine("Codigo de la persona : {0}\n", CodePerson);
-            //Console.WriteLine("{0}\n", FileID);
             Console.WriteLine("Se ha guardado la persona en la base de datos\n");
             Console.WriteLine("-----------------------------------");
         }
-
-
     }
 }

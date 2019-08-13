@@ -36,9 +36,6 @@ namespace Proyecto_10_FINAL.domain
                 password = value;
             }
 
-
         }
-
-
     }
 }

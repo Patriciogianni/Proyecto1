@@ -20,10 +20,8 @@ namespace Proyecto_10_FINAL.domain
             Console.WriteLine("Escribe el genero: M / F / Delfin / No sabe");
             person.Gender = Console.ReadLine();
 
-
             Console.WriteLine("Escribe el apellido");
             person.LastName = Console.ReadLine();
-
 
             Console.WriteLine("Escribe el Nombre completo");
             person.Name = Console.ReadLine();
@@ -36,7 +34,7 @@ namespace Proyecto_10_FINAL.domain
 
             person.CodePerson = generateCodePerson().ToString("00000");
 
-            person.toString(); // Me muestra la persona completa para verificar que este bien cargado.
+            person.showPerson(); // Me muestra la persona completa para verificar que este bien cargado.
 
             return person;
         }
@@ -49,71 +47,64 @@ namespace Proyecto_10_FINAL.domain
             return code;
         }
 
-        static int generateId(/*List<File> list*/) // Generar el Id del legajo.
+        static int generateId() // Generar el Id del legajo.
         {
             int code;
             Random random = new Random();
             code = random.Next(1, 99);
             return code;
-            //string listSize = list.Count().ToString(); // La cantidad de posiciones pasados a string para que la consola lo pueda leer.
-            //return "PG 000/" + listSize;
         }
         static File createFile(List<Person> personList, string idfile) // Recibe la lista de personas y el codigo cargado a la persona
         {
-
             File file = new File();
             file.IdFile = idfile; // el codigo de la persona ingresado sera el codigo del legajo.
             Console.WriteLine("Ingrese el codigo de la persona");
             string code = Console.ReadLine();
             file.Person = personList.Find(p => code.Equals(p.CodePerson)); // Recorre la lista y encuentra una persona donde la condicion de que el codigo y el Id sean iguales, para luego mostrarlo.
-                                                                           // la clase file tiene como atributo a Person (persona)
-
+            // la clase file tiene como atributo a Person (persona)
             file.toString();//Lo mostramos.
+            Console.WriteLine("Se ha generado con éxito el numero de Legajo");
 
             return file;
         }
 
-
-        static DefinitivePerson asociar(Person p, File f)
+        static DefinitivePerson createDefinitivePerson(Person person, File file)
         {
             DefinitivePerson person1 = new DefinitivePerson();
            
-            person1.PersonDef.Du = p.Du;
-            person1.PersonDef.Gender = p.Gender;
-            person1.PersonDef.LastName = p.LastName;
-            person1.PersonDef.Name = p.Name;
-            person1.PersonDef.Age = p.Age;
-            person1.PersonDef.DateBirth = p.DateBirth;
-            person1.PersonDef.CodePerson = p.CodePerson;
-            person1.FileDef.IdFile = f.IdFile;
+            person1.Du = person.Du;
+            person1.Gender = person.Gender;
+            person1.LastName = person.LastName;
+            person1.Name = person.Name;
+            person1.Age = person.Age;
+            person1.DateBirth = person.DateBirth;
+            person1.CodePerson = person.CodePerson;
+            person1.FileDef = file.IdFile;
 
             return person1;
         }
 
-        static void showPersonList(List<DefinitivePerson> defList)
+        static void showAllList(List<DefinitivePerson> defList, List<Person> personList, List<File> fileList)
         {
-            foreach (DefinitivePerson p in defList)
+            Console.WriteLine("Lista de Empleados");
+            foreach (DefinitivePerson d in defList)
             {
-                Console.WriteLine(p.FileDef.IdFile + p.PersonDef.Du + p.PersonDef.LastName + ", " + p.PersonDef.Name);
+                Console.WriteLine(d.FileDef + " " + d.Du + " " + d.LastName + ", " + d.Name);
             }
-        }
 
-        //static void fileandPersonLists(List<Person> personList, List<File> fileList)
-        //{
-        //    Console.WriteLine("Lista de Personas");
-        //    Console.WriteLine(" ");
-        //    foreach (Person p in personList)
-        //    {
-        //        Console.WriteLine(p.FileID + p.CodePerson + " " + p.Du + " " + p.LastName + ", " + p.Name);
-        //    }
-        //    Console.WriteLine(" ");
-        //    Console.WriteLine("Lista de Legajos");
-        //    Console.WriteLine(" ");
-        //    foreach (File f in fileList)
-        //    {
-        //        Console.WriteLine(f.IdFile);
-        //    }
-        //}
+            Console.WriteLine("Lista de Personas");
+            foreach (Person p in personList)
+            {
+                Console.WriteLine(p.CodePerson);
+            }
+
+            Console.WriteLine("Lista de Legajos");
+            foreach  (File f in fileList)
+            {
+                Console.WriteLine(f.IdFile);
+            }
+
+        }
 
         public void showMenu()
         {
@@ -128,11 +119,10 @@ namespace Proyecto_10_FINAL.domain
                     Console.WriteLine("Elija una opción para operar");
                     Console.WriteLine("----------------------------------");
                     Console.WriteLine("0.- Crear persona");
-                    Console.WriteLine("1.- Agregar legajo a la persona");
-                    Console.WriteLine("2.- Eliminar Legajo");
-                    Console.WriteLine("3.- Modificar Legajo");
-                    Console.WriteLine("4.- Legajo Administrador");
-                    Console.WriteLine("5.- SALIR");
+                    Console.WriteLine("1.- Eliminar Legajo");
+                    Console.WriteLine("2.- Modificar Legajo");
+                    Console.WriteLine("3.- Legajo Administrador");
+                    Console.WriteLine("4.- SALIR");
                     Console.WriteLine("----------------------------------");
 
                     opcion = Convert.ToInt32(Console.ReadLine());
@@ -142,65 +132,44 @@ namespace Proyecto_10_FINAL.domain
                         Console.WriteLine("Ingrese una opcion valida entre 0 y 5");
                     }
 
-                } while (opcion < 0 || opcion > 5);
+                } while (opcion < 0 || opcion > 4);
 
                 switch (opcion)
                 {
                     case 0:
-
-                        Console.WriteLine("Se agrega el legajo a la persona");
 
                         // Se crea la persona y se agrega a la lista de personas.
                         Person person = createPerson();
                         personList.Add(person);
                         
                         // Se crea un legajo y se agrega a la lista de legajos.
-                        File file = createFile(personList, generateId().ToString("PG 000/00"));
+                        File file = createFile(personList, generateId().ToString("PG000/00"));
                         fileList.Add(file);
 
                         // Se crea una persona Definitiva y se le agrega la persona y su respectivo ID Legajo.
-                        DefinitivePerson person10 = asociar(person, file);
+                        DefinitivePerson person10 = createDefinitivePerson(person, file);
                         defList.Add(person10);
-
-
                         break;
 
                     case 1:
 
-                        //// Creo el legajo con una persona y su Id lista generado.
-                        //File file = createFile(personList, generateId().ToString("PG 000/00"));
-                        //// Agrego el legajo a la lista de legajos.
-                        //fileList.Add(file);
-                        break;
-
-                    case 2:
-
-                        Console.WriteLine("Ingrese el Codigo de la persona que desea eliminar");
+                        Console.WriteLine("Ingrese el codigo de la persona que desea eliminar de forma permanente");
                         string codeRemoved = Console.ReadLine();
+                        defList.RemoveAll(r => r.CodePerson == codeRemoved);
                         personList.RemoveAll(r => r.CodePerson == codeRemoved);
-                        Console.WriteLine("Ingrese el Legajo de la persona que desea eliminar");
-                        string fileRemoved = Console.ReadLine();
-                        fileList.RemoveAll(f => f.IdFile == fileRemoved);
+                        fileList.RemoveAll(r => r.Person.CodePerson == codeRemoved);
                         Console.WriteLine("La persona se ha eliminado con exito");
                         break;
 
-                    case 4:
-                        showPersonList(defList);
-                        //fileandPersonLists(personList, fileList);
+                    case 3:
+
+                        showAllList(defList, personList, fileList);
                         break;
-
-                    case 5:
-
-                        //userIsOnline = false;
-                        break;
-
                 }
 
-            } while (opcion != 5);
+            } while (opcion != 4);
 
             Console.WriteLine("Muchas gracias Vuelva Prontos");
-
         }
-
     }
 }
