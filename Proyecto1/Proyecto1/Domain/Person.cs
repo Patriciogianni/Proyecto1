@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Proyecto_10_FINAL.domain
 {
-    class Person
+    [Serializable]
+    public class Person
     {
         private int du;
         private string gender;
@@ -15,7 +16,6 @@ namespace Proyecto_10_FINAL.domain
         private int age;
         private string dateBirth;
         private string codePerson;
-
         public int Du
         {
             get
@@ -29,7 +29,6 @@ namespace Proyecto_10_FINAL.domain
             }
 
         }
-
         public string Gender
         {
             get
@@ -43,7 +42,6 @@ namespace Proyecto_10_FINAL.domain
             }
 
         }
-
         public string LastName
         {
             get
@@ -57,7 +55,6 @@ namespace Proyecto_10_FINAL.domain
             }
 
         }
-
         public string Name
         {
             get
@@ -112,6 +109,14 @@ namespace Proyecto_10_FINAL.domain
                 codePerson = value;
             }
 
+        }
+
+        public int generateCodePerson()
+        {
+            int code;
+            Random random = new Random();
+            code = random.Next(100, 1000);
+            return code;
         }
 
         public void showPerson() // Muestro por patallla lo cargado.

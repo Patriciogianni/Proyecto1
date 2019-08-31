@@ -1,5 +1,4 @@
-﻿
-using Proyecto_10_FINAL.domain; // Llamar el paquete siempre 
+﻿using Proyecto_10_FINAL.domain; // Llamar el paquete siempre 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +19,11 @@ namespace Proyecto_10_FINAL
         static User firstLogin()
         {
             User user = new User();
+            Validation validate = new Validation();
 
             Console.WriteLine("Escriba el nombre de usuario");
             user.Name = Console.ReadLine();
-            Console.WriteLine("Escriba su contraseña");
-            user.Password = Console.ReadLine();
-
+            validate.validationUserPassword(user);
             return user;
         }
 
@@ -36,6 +34,8 @@ namespace Proyecto_10_FINAL
 
             Menu menu = new Menu();
             menu.showMenu();
+
+
         }
     }
 }

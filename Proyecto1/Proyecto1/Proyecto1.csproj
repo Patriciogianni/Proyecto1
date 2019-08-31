@@ -41,13 +41,16 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\DefinitivePerson.cs" />
     <Compile Include="Domain\File.cs" />
     <Compile Include="Domain\Menu.cs" />
     <Compile Include="Domain\Person.cs" />
+    <Compile Include="Domain\Statistics.cs" />
     <Compile Include="Domain\User.cs" />
+    <Compile Include="Domain\Validation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

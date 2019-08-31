@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Proyecto_10_FINAL.domain
 {
-    class DefinitivePerson : Person
+    [Serializable]
+    public class DefinitivePerson : Person
     {
-        //private Person personDef;
         private string fileDef;
         public string FileDef
         {
@@ -34,8 +34,7 @@ namespace Proyecto_10_FINAL.domain
             Console.WriteLine("Edad: {0}\n", Age);
             Console.WriteLine("Fecha de Nacimiento: {0}\n", DateBirth);
             Console.WriteLine("Codigo de la persona : {0}\n", CodePerson);
-            Console.WriteLine("{0}\n", FileDef);
-            Console.WriteLine("Se ha guardado la persona en la base de datos\n");
+            Console.WriteLine("Legajo: {0}\n", FileDef);
             Console.WriteLine("-----------------------------------");
         }
 

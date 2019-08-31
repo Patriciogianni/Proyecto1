@@ -23,7 +23,6 @@ namespace Proyecto_10_FINAL.domain
                 name = value;
             }
         }
-
         public string Password
         {
             get
@@ -35,7 +34,6 @@ namespace Proyecto_10_FINAL.domain
             {
                 password = value;
             }
-
         }
     }
 }
