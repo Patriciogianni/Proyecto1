@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Proyecto_10_FINAL.domain
+namespace Proyecto1.Domain
 {
-    class File
+    [Serializable]
+    public class File
     {
         private string idFile;
-        private Person person; //Porque va a recibir una "persona completa (con Du, nombre, apellido...)
+        private Person person;
 
         public string IdFile
         {
@@ -24,7 +25,6 @@ namespace Proyecto_10_FINAL.domain
             }
 
         }
-
         public Person Person
         {
             get
@@ -38,14 +38,10 @@ namespace Proyecto_10_FINAL.domain
             }
 
         }
-
-
-        public void toString() //Muestro por pantalla lo cargado.
+        public void toString()
         {
             Console.WriteLine("Id del legajo: {0}\n", IdFile);
             Console.WriteLine("Codigo de la persona : {0}\n", Person.CodePerson);
         }
-
-
     }
 }

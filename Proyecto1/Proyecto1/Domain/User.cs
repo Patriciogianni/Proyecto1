@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Proyecto_10_FINAL.domain
+namespace Proyecto1.Domain
 {
     class User
     {
@@ -23,7 +23,6 @@ namespace Proyecto_10_FINAL.domain
                 name = value;
             }
         }
-
         public string Password
         {
             get
@@ -35,10 +34,6 @@ namespace Proyecto_10_FINAL.domain
             {
                 password = value;
             }
-
-
         }
-
-
     }
 }

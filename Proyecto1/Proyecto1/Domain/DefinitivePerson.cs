@@ -4,28 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Proyecto_10_FINAL.domain
+namespace Proyecto1.Domain
 {
-    class DefinitivePerson
+    [Serializable]
+    public class DefinitivePerson : Person
     {
-        private Person personDef;
-        private File fileDef;
-
-        public Person PersonDef
-        {
-            get
-            {
-                return personDef;
-            }
-
-            set
-            {
-                personDef = value;
-            }
-
-        }
-
-        public File FileDef
+        private string fileDef;
+        public string FileDef
         {
             get
             {
@@ -37,11 +22,20 @@ namespace Proyecto_10_FINAL.domain
             }
 
         }
-
         public void ShowDefPerson()
         {
-            Console.WriteLine(PersonDef);
-            Console.WriteLine(FileDef);
+            Console.WriteLine(" ");
+            Console.WriteLine("Persona Definitiva");
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("DU: {0}\n", Du);
+            Console.WriteLine("Genero: {0}\n", Gender);
+            Console.WriteLine("Apellido: {0}\n", LastName);
+            Console.WriteLine("Nombre: {0}\n", Name);
+            Console.WriteLine("Edad: {0}\n", Age);
+            Console.WriteLine("Fecha de Nacimiento: {0}\n", DateBirth);
+            Console.WriteLine("Codigo de la persona : {0}\n", CodePerson);
+            Console.WriteLine("Legajo: {0}\n", FileDef);
+            Console.WriteLine("-----------------------------------");
         }
 
     }
